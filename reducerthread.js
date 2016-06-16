@@ -10046,8 +10046,6 @@
     })
 );
 
-//@ sourceMappingURL=vm.js.map
-
 // reducerthread.js
 // repo    : https://github.com/richardanaya/reducerthread
 // license : MIT
@@ -10068,7 +10066,7 @@
                 vms.push(
                     {
                         state: null,
-                        code:code,
+                        compiled: Vm.compile(code+";state"),
                         executionTime: 0
                     }
                 )
@@ -10081,7 +10079,7 @@
                 var startTime = performance.now();
                 var newState = null;
                 try {
-                    newState = vm.eval(vms[i].code, 'timeout.js', maxTime)
+                    newState = vm.run(vms[i].compiled, 'timeout.js', maxTime)
                 }
                 catch(e){
                     if(error)
