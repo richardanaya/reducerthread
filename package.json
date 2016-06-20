@@ -1,6 +1,6 @@
 {
   "name": "reducerthread",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "reducerthread.js",
   "scripts": {
@@ -9,5 +9,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "vm.js": "0.0.6"
   }
 }
