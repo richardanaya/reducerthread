@@ -10060,6 +10060,9 @@
         var error = config.onError;
         var vms = [];
         var ps = [];
+        var deltaTime = 0;
+        var d = new Date();
+        var time = performance.now()
 
         function go(codes){
             codes.forEach(function(code){
@@ -10075,6 +10078,8 @@
             var vm = new Vm();
 
             function run(i){
+                vm.realm.global.time = d.getTime();
+                vm.realm.global.deltaTime = deltaTime;
                 vm.realm.global.state = vms[i].state;
                 var startTime = performance.now();
                 var newState = null;
@@ -10094,6 +10099,9 @@
                     if(frameComplete)
                         frameComplete({vms:vms})
                     setTimeout(function(){
+                        var newtime = performance.now()
+                        deltaTime = newtime-time;
+                        time = newtime;
                         run(nexti);
                     },1000/60);
                 }
@@ -10117,7 +10125,6 @@
         else if(sources){
             go(sources);
         }
-        return vms;
     }
 })(
     typeof window !== "undefined" ? window : {},
